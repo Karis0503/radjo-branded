@@ -13,7 +13,6 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://radjo-branded.vercel.app"),
   title: "Radjo Branded – Fashion Harian Berkualitas Sejak 2013",
   description:
     "Radjo Branded menyediakan fashion harian berkualitas sejak 2013. Tersedia online & toko offline Anggada dan Cikaret.",
@@ -25,9 +24,8 @@ export const metadata: Metadata = {
     "toko baju anggada",
     "toko baju cikaret",
   ],
-  robots: {
-    index: true,
-    follow: true,
+  verification: {
+    google: "626rJmKfLYgqRHtJBOrICuJT1Q2_qsrgc2EWq5U-mr8", // 🔴 ISI SESUAI DARI GSC
   },
   openGraph: {
     title: "Radjo Branded",
@@ -35,7 +33,6 @@ export const metadata: Metadata = {
     type: "website",
     locale: "id_ID",
     url: "https://radjo-branded.vercel.app",
-    siteName: "Radjo Branded",
   },
 };
 
@@ -46,9 +43,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
     </html>
