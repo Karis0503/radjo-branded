@@ -10,10 +10,10 @@ export default function Home() {
       {/* HERO */}
       <section className="max-w-7xl mx-auto p-10 text-center">
         <h1 className="text-4xl font-bold mb-4">
-          Fashion Harian Berkualitas — Sejak 2013
+          Fashion Harian Berkualitas
         </h1>
         <p className="text-gray-600 mb-6">
-          Dipercaya pelanggan online & offline. Ada toko fisik.
+          Dipakai Ribuan Pelanggan Sejak 2013
         </p>
 
         <div className="flex justify-center gap-4">
