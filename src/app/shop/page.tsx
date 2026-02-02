@@ -84,8 +84,8 @@ export default function ShopPage() {
               <div className="mt-auto flex flex-col gap-2">
                 {/* DETAIL */}
                 <Link
-                  href={`/product/${product.slug}`}
-                  className="text-center px-4 py-2 border border-white hover:bg-white hover:text-black transition"
+                    href={`/product/${product.slug}`}
+                    className="block px-4 py-2 border"
                 >
                   Lihat Detail
                 </Link>
