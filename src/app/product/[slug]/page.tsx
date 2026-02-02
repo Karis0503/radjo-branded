@@ -1,116 +1,104 @@
+import { notFound } from "next/navigation";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Link from "next/link";
 
+// Dummy data (nanti bisa diganti DB / CMS)
 const products = [
   {
-    id: 1,
+    slug: "kaos-basic-premium",
     name: "Kaos Basic Premium",
     price: "Rp 85.000",
-    note: "Nyaman dipakai harian",
+    desc: "Kaos basic premium berbahan cotton lembut, nyaman dipakai seharian.",
+    details: [
+      "Bahan cotton combed",
+      "Nyaman & adem",
+      "Jahitan rapi",
+      "Cocok untuk harian",
+    ],
   },
   {
-    id: 2,
+    slug: "kaos-oversize",
     name: "Kaos Oversize",
     price: "Rp 95.000",
-    note: "Cutting santai & modern",
+    desc: "Kaos oversize dengan cutting santai dan modern.",
+    details: [
+      "Cutting oversize",
+      "Bahan tebal & jatuh",
+      "Style streetwear",
+    ],
   },
   {
-    id: 3,
+    slug: "crewneck-polos",
     name: "Crewneck Polos",
     price: "Rp 135.000",
-    note: "Hangat & simpel",
-  },
-  {
-    id: 4,
-    name: "Hoodie Basic",
-    price: "Rp 175.000",
-    note: "Bahan tebal, nyaman",
-  },
-  {
-    id: 5,
-    name: "Celana Santai",
-    price: "Rp 120.000",
-    note: "Cocok buat harian",
-  },
-  {
-    id: 6,
-    name: "Topi Basic",
-    price: "Rp 55.000",
-    note: "Simple & fungsional",
+    desc: "Crewneck polos hangat, simpel, dan mudah dipadukan.",
+    details: [
+      "Bahan fleece",
+      "Hangat & nyaman",
+      "Cocok indoor / outdoor",
+    ],
   },
 ];
 
-export default function ShopPage() {
+export default function ProductDetail({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const product = products.find((p) => p.slug === params.slug);
+
+  if (!product) return notFound();
+
   return (
     <>
       <Navbar />
 
-      {/* HERO */}
-      <section className="bg-black text-white border-b">
-        <div className="max-w-7xl mx-auto px-6 py-20 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Katalog Produk
-          </h1>
-          <p className="text-gray-400">
-            Produk fashion harian Radjo Branded — stok real & siap kirim
-          </p>
-        </div>
-      </section>
+      <section className="max-w-6xl mx-auto px-6 py-20">
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          
+          {/* IMAGE */}
+          <div className="border aspect-square flex items-center justify-center text-gray-500">
+            Image
+          </div>
 
-      {/* PRODUCT GRID */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="border p-6 flex flex-col justify-between hover:shadow-lg transition"
+          {/* INFO */}
+          <div>
+            <h1 className="text-3xl font-bold mb-2">
+              {product.name}
+            </h1>
+
+            <p className="text-xl font-semibold mb-4">
+              {product.price}
+            </p>
+
+            <p className="text-gray-600 mb-6">
+              {product.desc}
+            </p>
+
+            <ul className="list-disc list-inside text-sm text-gray-500 mb-8">
+              {product.details.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+
+            <a
+              href={`https://wa.me/628xxxxxxxxxx?text=Halo%20Radjo%2C%20saya%20tertarik%20dengan%20produk%20${product.name}`}
+              target="_blank"
+              className="inline-block px-8 py-4 bg-black text-white hover:opacity-90 transition"
             >
-              {/* IMAGE PLACEHOLDER */}
-              <div className="bg-gray-100 h-48 mb-6 flex items-center justify-center text-gray-400">
-                Image
-              </div>
+              Order via WhatsApp
+            </a>
 
-              <div>
-                <h3 className="text-lg font-semibold mb-1">
-                  {product.name}
-                </h3>
-                <p className="text-sm text-gray-500 mb-2">
-                  {product.note}
-                </p>
-                <p className="font-bold mb-4">
-                  {product.price}
-                </p>
-              </div>
-
-              <a
-                href="https://wa.me/628xxxxxxxxxx"
-                target="_blank"
-                className="text-center px-4 py-3 bg-black text-white hover:bg-gray-800 transition"
+            <div className="mt-6">
+              <Link
+                href="/shop"
+                className="text-sm text-gray-500 hover:underline"
               >
-                Order via WhatsApp
-              </a>
+                ← Kembali ke katalog
+              </Link>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="bg-black text-white">
-        <div className="max-w-7xl mx-auto px-6 py-20 text-center">
-          <h2 className="text-3xl font-bold mb-4">
-            Mau Tanya Stok atau Ukuran?
-          </h2>
-          <p className="text-gray-400 mb-8">
-            Admin kami siap bantu kamu memilih produk terbaik.
-          </p>
-          <a
-            href="https://wa.me/628xxxxxxxxxx"
-            target="_blank"
-            className="inline-block px-10 py-4 border border-white hover:bg-white hover:text-black transition"
-          >
-            Chat Admin Sekarang
-          </a>
+          </div>
         </div>
       </section>
 
