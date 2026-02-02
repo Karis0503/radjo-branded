@@ -85,7 +85,7 @@ export default function ShopPage() {
                 {/* DETAIL */}
                 <Link
                     href={`/product/${product.slug}`}
-                    className="block px-4 py-2 border"
+                    className="block px-4 py-2 border text-center"
                 >
                   Lihat Detail
                 </Link>
