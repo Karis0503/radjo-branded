@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
@@ -32,11 +31,7 @@ const products = [
     name: "Crewneck Polos",
     price: "Rp 135.000",
     desc: "Crewneck polos yang hangat dan simpel.",
-    details: [
-      "Bahan tebal",
-      "Hangat dipakai",
-      "Desain minimal",
-    ],
+    details: ["Bahan tebal", "Hangat dipakai", "Desain minimal"],
   },
   {
     slug: "celana-panjang-pria",
@@ -51,22 +46,31 @@ const products = [
   },
 ];
 
-type Props = {
-  params: {
-    slug: string;
-  };
-};
-
-export default function ProductDetailPage({ params }: Props) {
+export default function ProductDetailPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const product = products.find((p) => p.slug === params.slug);
 
   if (!product) {
-    notFound();
+    return (
+      <>
+        <Navbar />
+        <section className="max-w-7xl mx-auto px-6 py-32 text-center">
+          <h1 className="text-3xl font-bold mb-4">
+            Produk tidak ditemukan
+          </h1>
+          <Link href="/shop" className="underline">
+            Kembali ke katalog
+          </Link>
+        </section>
+        <Footer />
+      </>
+    );
   }
 
-  const waLink = `https://wa.me/628XXXXXXXXXX?text=Halo%20admin,%20saya%20ingin%20order%20${encodeURIComponent(
-    product.name
-  )}`;
+  const waLink = `https://wa.me/628xxxxxxxxxx?text=Halo admin, saya ingin order ${product.name}`;
 
   return (
     <>
@@ -81,7 +85,7 @@ export default function ProductDetailPage({ params }: Props) {
             / {product.name}
           </p>
 
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+          <h1 className="text-4xl font-bold mb-4">
             {product.name}
           </h1>
 
@@ -91,7 +95,7 @@ export default function ProductDetailPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-16">
+      <section className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-16">
         <div className="border h-[380px] flex items-center justify-center text-gray-400">
           Image Produk
         </div>
@@ -116,11 +120,8 @@ export default function ProductDetailPage({ params }: Props) {
           </a>
 
           <div className="mt-6">
-            <Link
-              href="/shop"
-              className="text-sm text-gray-400 hover:underline"
-            >
-              ← Kembali ke Katalog
+            <Link href="/shop" className="text-sm text-gray-400 underline">
+              ← Kembali ke katalog
             </Link>
           </div>
         </div>
